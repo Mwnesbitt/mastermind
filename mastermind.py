@@ -5,6 +5,7 @@ import random
 import strategies
 
 #Comment added to make sure I know how to merge and commit.
+#Comment added to make sure I know how to branch, then commit, then merge.
 def createcode():
   code = ''
   i=0
