@@ -4,9 +4,8 @@ import os
 import random
 import strategies
 
-# Define a main() function that prints a little greeting.
+#Comment added to make sure I know how to merge and commit.
 def createcode():
-  #print("Program started")
   code = ''
   i=0
   while i<4:
