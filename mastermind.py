@@ -6,11 +6,13 @@ import strategies
 
 #Comment added to make sure I know how to merge and commit.
 #Comment added to make sure I know how to branch, then commit, then merge.
-def createcode():
+def createcode(colors, length):
+  #colors is the number of colors available in the game as an integer
+  #length is the number of colored pegs in the code
   code = ''
   i=0
-  while i<4:
-    code = code + str(random.randrange(0,6))
+  while i<length:
+    code = code + str(random.randrange(0,colors))
     i=i+1
   return code
 
@@ -41,7 +43,7 @@ def gradeguess(code, guess):
 def codebreaker():
   rounds = 6
   guesshistory=[]
-  code = createcode()
+  code = createcode(6,4)
   #print(code)
   while rounds>0:
     rounds = rounds-1
@@ -70,7 +72,7 @@ def codemaker():
   print(code)
   while rounds>0:
     rounds = rounds-1
-    guess = createcode() #strategies.randomguess
+    guess = createcode(6,4) #strategies.randomguess
     pegs=gradeguess(code,guess)
     print(guess,pegs)
     if(pegs[0]==4):
