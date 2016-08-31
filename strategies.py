@@ -9,6 +9,17 @@ can work in such a way where the logic selects a strategy to use.  It's possible
 want to structure things such that "user choosing" is a strategy that's part of this set
 """
 
+def runstrategy(strategyname):
+  #strategyname is a string.  Is there a way to do this directly instead of using my if, elif..., else chain?
+  if(strategyname="randomguess"):
+    randomguess()
+  elif(strategyname="dontbedumb"):
+    dontbedumb()
+  #elif
+  else:
+    print("No such strategy")
+    sys.exit(1)
+
 def randomguess():
   code = ''
   i=0
