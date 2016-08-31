@@ -14,3 +14,5 @@ Additional analysis can evaluate how algorithms perform when the number of pegs
 in a code and the number of colors is varied.  It might be fun to plot that 3
 space equation in mathematica or write a program where I have to interface between
 mathematica and my python program.
+
+I edited this
