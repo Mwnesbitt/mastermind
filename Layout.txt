@@ -10,14 +10,4 @@ B. Computer guesses the user's code (employs strategies)
 C. Computer plays itself and records output so that you can evaluate strategies
 D. Mathematica can plot variables in # of pegs and # of colors.
 
-Right now there are only 2 files-- mastermind.py and strategies.py where all the strategies are stored.  mastermind.py should call on strategies.py all the time-- one strategy is randomguess, another is dontbedumb, and third could be an improvement on dontbedumb where it doesn't double up on colors.  POssible that a strategy can be "user guesses" which is implemented in games where the user is guessing rather than the computer-- not sure if that's the way to go just yet as I need to consider exactly how to implement this
-
-
-need to figure out how to query the user for input on the command line
-start the program by stating whether you're guessing or grading.  
-After each guess the program needs to print the guess 4195 and the grade RRW in columns, so:
-1234 RW
-1456 RWW
-2654 RRW
-
-Google mastermind strategies
+Right now there are only 2 files-- mastermind.py and strategies.py where all the strategies are stored.  mastermind.py should call on strategies.py all the time-- one strategy is randomguess, another is dontbedumb, and third could be an improvement on dontbedumb where it doesn't double up on colors.  (Google some mastermind strategies if you want.)   It's possible that a strategy can be "user guesses" which is implemented in games where the user is guessing rather than the computer-- not sure if that's the way to go just yet as I need to consider exactly how to implement this
