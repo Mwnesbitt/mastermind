@@ -9,7 +9,9 @@ import strategies
 def createcode(colors, length):
   #colors is the number of colors available in the game as an integer
   #length is the number of colored pegs in the code
-  code = '1122'
+  code = '1122'#made this a set code for testing
+  #commented out the random guessing so I could test the gradeguess
+  
   #i=0
   #while i<length:
   #  code = code + str(random.randrange(0,colors))#Have you done any research on how "good" python's RNG is?
@@ -31,30 +33,34 @@ def gradeguess(code, guess):
   """
   If there are duplicate colours in the guess, they cannot all be awarded a key peg unless they correspond to the same number of duplicate colours in the hidden code. For example, if the hidden code is white-white-black-black and the player guesses white-white-white-black, the codemaker will award two colored key pegs for the two correct whites, nothing for the third white as there is not a third white in the code, and a colored key peg for the black. No indication is given of the fact that the code also includes a second black
   """
-  #assumes properly formatted code and guess
+  #assumes properly formatted code and guess #This pains me but I know its the best for time purposes
   blackpegs=0
   whitepegs=0
   i=0
   tempCode = list(code)#turn code into a list
-  tempGuess = list(guess)
-  while i<4:
+  tempGuess = list(guess)#turn guess into a list
+  while i<4:#run through the code to check for black pegs
     if(tempGuess[i]==tempCode[i]):
       blackpegs = blackpegs+1
       tempCode[i]='b'#replace the black pegs with a b so it wont be counted in the white peg section
       tempGuess[i]='b'#replace the black pegs with a b so it wont be counted in the white peg section
     i=i+1
-  i=0
-  while i<4:
-    k=0 #k=0, k=i?
+  i=0 #reset i; could just change i to j below?
+  while i<4:#run through the code to check for white pegs
+    k=0 #k=0, k=i? #I think k=0 is correct now
     while k<4:
-        if(tempGuess[i]=='b'): #makes sure that black pegs aren't counted as being "the same"
+        if(tempGuess[i]=='b'): #makes sure that black pegs aren't counted as being white pegs
             break
         if(tempGuess[i]==tempCode[k]):
             whitepegs=whitepegs+1
+            tempGuess[i]='w'
+            tempCode[k]='w'
             break
         k=k+1
     i=i+1
   result=[blackpegs,whitepegs]
+  print "code= "+code
+  print "guess= "+"".join(tempGuess)
   return result
   
   
@@ -65,7 +71,7 @@ def codebreaker():
   #print(code)
   while rounds>0:
     rounds = rounds-1
-    guess = str(input("Take a guess: ")) #assumes a guess is properly formatted
+    guess = str(input("Take a guess: ")) #assumes a guess is properly formatted #it pains me not to make this unbreakable but its probably just a waste of time
     #print(code)
     pegs=gradeguess(code,guess)
     temp=[]
