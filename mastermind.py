@@ -61,6 +61,7 @@ def codebreaker():
       sys.exit(0)
     if(rounds==0):
       print("Sorry, you're out of guesses!  You lose!")
+      print("The code was: "+code)
       sys.exit(0)
   
 def codemaker():
