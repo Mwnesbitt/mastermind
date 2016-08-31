@@ -9,7 +9,7 @@ import strategies
 def createcode(colors, length):
   #colors is the number of colors available in the game as an integer
   #length is the number of colored pegs in the code
-  code = '4114'
+  code = '1122'
   #i=0
   #while i<length:
   #  code = code + str(random.randrange(0,colors))#Have you done any research on how "good" python's RNG is?
