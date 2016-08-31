@@ -85,16 +85,29 @@ def codemaker():
   
 
 def main():
-  #The goal with the commented out text is for the user to customize: codebreaker, codemaker, maybe # of rounds, maybe length of code, strategies employed by computer if codemaking, etc.
+  """
+  Future Goal in customizing the program:
+  Allow the user to customize the program in several ways:
+  1. "Analytics mode" where there aren't a bunch of things printed to the screen--
+    this is the mode to use when trying to analytics and have the computer play itself.
+    You may want to generate a file that has the results-- this could be a csv
+    or something that could easily be imported into a graphing program like Mathematica
+  2. Change the parameters of the game: # of rounds, length of code, strategies employed
+    by the computer when the user is codemaking, etc.
   """
   if len(sys.argv) != 2:
-    print(sys.argv[1])
-    print(sys.argv[2])
+    print("You need to specify 'codemaker' or 'codebreaker'")
+    for item in sys.argv:
+      print(item)
     sys.exit(1)
-  """
-  codebreaker()
-  #codemaker()
-  
+  if (sys.argv[1]=="codemaker"):
+    codemaker()
+  elif (sys.argv[1]=="codebreaker"):
+    codebreaker()
+  else:
+    print("You must select 'codemaker' or 'codebreaker'")
+    sys.exit(1)
+    
   
 # This is the standard boilerplate that calls the main() function.
 if __name__ == '__main__':
