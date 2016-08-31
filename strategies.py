@@ -11,9 +11,9 @@ want to structure things such that "user choosing" is a strategy that's part of 
 
 def runstrategy(strategyname):
   #strategyname is a string.  Is there a way to do this directly instead of using my if, elif..., else chain?
-  if(strategyname="randomguess"):
+  if(strategyname=="randomguess"):
     randomguess()
-  elif(strategyname="dontbedumb"):
+  elif(strategyname=="dontbedumb"):
     dontbedumb()
   #elif
   else:
