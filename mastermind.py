@@ -77,9 +77,11 @@ def codemaker():
     print(guess,pegs)
     if(pegs[0]==4):
       print("The computer guessed your code.  You lose!")
+      print("The computer was using strategy: randomguess")
       sys.exit(0)
     if(rounds==0):
       print("The computer didn't guess your code!  You win!")
+      print("The computer was using strategy: randomguess")
       sys.exit(0)
   
   
