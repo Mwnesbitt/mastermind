@@ -9,6 +9,11 @@ can work in such a way where the logic selects a strategy to use.  It's possible
 want to structure things such that "user choosing" is a strategy that's part of this set
 """
 
+def methodRunner(methodToRun):
+  #methodToRun must be a string
+  result = methodToRun()
+  return result
+
 def runstrategy(strategyname):
   #strategyname is a string.  Is there a way to do this directly instead of using my if, elif..., else chain?
   if(strategyname=="randomguess"):

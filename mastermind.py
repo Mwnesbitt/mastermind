@@ -87,6 +87,7 @@ def codemaker():
   print(code)
   while rounds>0:
     rounds = rounds-1
+    #will need a try catch where we use runnerMethod to call a strategy method.  But how do you pass in parameters, like # of colors and length?
     guess = createcode(6,4) #strategies.randomguess
     pegs=gradeguess(code,guess)
     print(guess,pegs)
