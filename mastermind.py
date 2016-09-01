@@ -100,7 +100,19 @@ def codemaker():
       print("The computer was using strategy: randomguess")
       sys.exit(0)
   
+def runGame(rounds, colors, slots, codemakestrategy, codebreakstrategy):
+  rounds=int(rounds)
+  colors=int(colors)
+  slots=int(slots)
+  history=[]
   
+  code = cmakestrat.cmakestratHelper(codemakestrategy, rounds, colors, slots)
+  #There has to be a better way than using the helper methods I made, but they work for now.  Something like: cmakestrat.codemakestrategy(rounds, colors, slots)
+  
+  #now we start looping through the guess-- this function needs to build up the history object and pass it back and forth to cbreakstrat.codebreakstrategy()
+  
+  
+    
 
 def main():
   """
@@ -113,17 +125,7 @@ def main():
   2. Change the parameters of the game: # of rounds, length of code, strategies employed
     by the computer when the user is codemaking, etc.
   """
-  """ 
-  codeType = input("Select 1 for codebreaker or 2 for codemaker: ")
-  if codeType == 1:
-      print("You have selected codebreaker")
-      codebreaker()
-  elif codeType == 2:
-      print("You have selected codemaker")
-      codemaker()
-  else:
-      print("You need to specify 'codemaker' or 'codebreaker'")
-      sys.exit(1)
+
   """
   if (len(sys.argv) != 2):
     print("You need to specify 'codemaker' or 'codebreaker'")
@@ -137,7 +139,17 @@ def main():
   else:
     print("You must select 'codemaker' or 'codebreaker'")
     sys.exit(1)
-    
+  """
+  #main method assumes that setting up a game, the user will define a 5-tuple: 
+  #number of rounds, number of colors, number of slots, codemaking strategy, codebreaking strategy
+  try:
+    runGame(sys.argv[1],sys.argv[2],sys.argv[3],sys.argv[4],sys.argv[5])
+  except:
+    print("Here are the params required to run this program:")
+    print("python mastermind.py rounds colors slots cmakestrat, cbreakstrat")
+    for item in sys.argv:
+      print(item)
+    sys.exit(1)       
   
 # This is the standard boilerplate that calls the main() function.
 if __name__ == '__main__':
