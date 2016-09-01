@@ -33,7 +33,6 @@ def randomGuess(rounds, colors, slots, history):
   while i<slots:
     guess = guess + str(random.randrange(0,colors))
     i=i+1
-  print(guess)
   return guess
   
 def askAHuman(rounds, colors, slots, history):
@@ -43,31 +42,40 @@ def askAHuman(rounds, colors, slots, history):
   guess = str(input("Enter your guess:")) #assumes proper formatting-- use mastermind.isWellFormed to check and reject if False
   return guess
   
-def dontBeDumb(rounds, colors, slots, history):  #runtime on this can definitely be improved...
+def dontBeDumb(rounds, colors, slots, history):  #Pretty sure runtime on this can be improved.
+""" There are definitely some issues with this method if you use random guesses-- it doesn't loop forever, and incrementing
+to the next code seems broken.  My concern here is that starting at 0* is probably not optimal so these errors need to be worked out
+if its really going to be the best algo.  I think the area to work them out is in helperfunctions.dontBeDumbIncrementGuess.  That function
+doesn't know how to roll over back to 0*.  If it did that, we could pick an initial guess of 1234...n and then increment.  Beyond that, 
+there could be an even more complicated function that increments more intelligently by skipping guesses that have doubled colors and coming
+back to them-- I suspect this is better because the guess gives you more information if there aren't doubled colors.
+"""
+  #guess=randomGuess(rounds, colors, slots, history)
   i=0
+  
+  #Have the initial guess be 0*.  I think it's probably best for initial guess to actually be all different colors if possible.
   guess=''
   while i<slots:
     guess = guess+"0"
     i=i+1
-  #we have our initial guess of 0*.  Now we test it:
-  if(history==[]):
-    return guess
   i=0
-  while i<colors**slots:
+  
+  while i<colors**slots: #Now that we have an initial guess, we check the history to make sure it isn't dumb
     goodguess=True
     for item in history: #Go through the history of the game:
-      if(guess==item[0]): #If this guess shows up as a guess in the history, throw it out, increment, and loop again
+      if(guess==item[0]): #If this guess shows up as a prior guess in the history, it's a dumb guess.  
         goodguess=False
         break
-      if(helperfunctions.gradeguess(colors, slots, guess, item[0])!=item[1]):  #If this guess has any chance of being right, assuming its the code would preserve the grades of previous guesses.  If it does for all guesses, accept it
+      if(helperfunctions.gradeguess(colors, slots, guess, item[0])!=item[1]):  #If this guess isn't dumb, then assuming its correct would should preserve the grades of previous guesses.
         goodguess=False
         break
     if(goodguess==True):
         return guess  
     else:
       #guess = randomGuess(rounds, colors, slots, history)
-      guess = helperfunctions.dontBeDumbIncrementGuess(guess,colors) #increments the guess by 1   
-    i=i+1  #the if statement should be true at some point, if not there's a bug somewhere
+      guess = helperfunctions.dontBeDumbIncrementGuess(guess,colors) #This needs fixing: It was built on the assumption that it would always start at 0*, so it doesn't know how to loop around.  I think that's the problem, anyway 
+    i=i+1 
+  print("Never found a good guess-- WTF?")
     
 ##other functions can be an improvement on dontbedumb where you try to avoid guessing the same color.
 ##google mastermind strategies to add more strategies here.

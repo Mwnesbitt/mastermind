@@ -2,7 +2,6 @@ import sys
 import re
 import os
 import random
-
 """
 Functions that other .py files need to be able to reference.  .py files cant import one another.
 """
@@ -26,6 +25,7 @@ def gradeguess(colors, slots, code, guess):
   blackpegs=0
   whitepegs=0
   i=0
+  #print(guess)
   tempCode = list(code)#turn code into a list
   tempGuess = list(guess)#turn guess into a list
   while i<slots:#run through the code to check for black pegs
