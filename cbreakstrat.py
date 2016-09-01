@@ -25,7 +25,7 @@ def cbreakstratHelper(name, param1, param2, param3, param4): #there has to be a 
   else:
     print("Codebreaking strategy "+name+" doesn't exist")
     sys.exit(1)
-    
+
 def randomGuess(rounds, colors, slots, history):
   guess = ''
   i=0
@@ -41,6 +41,6 @@ def askAHuman(rounds, colors, slots, history):
   guess = str(input("Enter your guess:")) #assumes proper formatting
   
 def dontBeDumb(rounds, colors, slots, history):
-### cycles through all possible guesses, assuming each one is the actual code and checking to see
+#cycles through all possible guesses, assuming each one is the actual code and checking to see
 #if all previous guesses would grade to what they actually graded to.  Throws out the guess if not.
   return ""

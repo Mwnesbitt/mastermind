@@ -2,7 +2,6 @@ import sys
 import re
 import os
 import random
-
 """
 The goal is to have a collection of codemaking strategy functions defined here.  They will all
 take the same arguments as one another so that they can easily be swapped for one another in 
