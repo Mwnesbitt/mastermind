@@ -1,5 +1,4 @@
 import sys
-import random
 import cbreakstrat
 import cmakestrat
 
