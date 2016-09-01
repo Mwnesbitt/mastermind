@@ -96,7 +96,7 @@ def main():
     print("mastermind.py rounds colors slots cmakestrat cbreakstrat")
     for item in sys.argv:
       print(item)
-    sys.exit(1)  
+    sys.exit(0)
   #try:
   runGame(sys.argv[1],sys.argv[2],sys.argv[3],sys.argv[4],sys.argv[5])
   """
@@ -106,7 +106,7 @@ def main():
     print("python mastermind.py rounds colors slots cmakestrat cbreakstrat")
     for item in sys.argv:
       print(item)
-    sys.exit(1)
+    sys.exit(0)
   """
 
 # This is the standard boilerplate that calls the main() function.
