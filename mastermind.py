@@ -50,14 +50,16 @@ def runGame(rounds, colors, slots, codemakestrategy, codebreakstrategy):
   The guess is a string of digits, and the grade is a list of 2 numbers-- the black pegs and white pegs. 
   """
   code = cmakestrat.cmakestratHelper(codemakestrategy, rounds, colors, slots)
-  print(code)
-  #There has to be a better way than using the helper methods I made, but they work for now.  
-  #Something like: cmakestrat.codemakestrategy(rounds, colors, slots)
+  #print(code)
+  """
+  ^^^There has to be a better way than using the helper methods I made, but they work for now.  
+  Something like: cmakestrat.codemakestrategy(rounds, colors, slots)
   
-  #now we start looping through the rounds-- this process builds up the history object
-  #after every guess from a cbreakstrat method, and then hands the new history back to 
-  #that method to make another guess on.  runGame and whatever cbreakstrat method was 
-  #selected pass the action back and forth until the game is over.  
+  Below: Now we start looping through the rounds-- this process builds up the history object
+  after every guess from a cbreakstrat method, and then hands the new history back to 
+  that method to make another guess on.  runGame and whatever cbreakstrat method was 
+  selected pass the action back and forth until the game is over.  
+  """
   while rounds>0:
     rounds = rounds-1
     guess=cbreakstrat.cbreakstratHelper(codebreakstrategy,rounds, colors, slots, history)

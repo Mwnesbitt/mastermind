@@ -29,7 +29,6 @@ def randomCode(rounds, colors, slots):
   while i<slots:
     code = code + str(random.randrange(0,colors))
     i=i+1
-  print(code)
   return code
 
 def askAHuman(rounds, colors, slots):
