@@ -50,6 +50,7 @@ def runGame(rounds, colors, slots, codemakestrategy, codebreakstrategy):
   The guess is a string of digits, and the grade is a list of 2 numbers-- the black pegs and white pegs. 
   """
   code = cmakestrat.cmakestratHelper(codemakestrategy, rounds, colors, slots)
+  print(code)
   #There has to be a better way than using the helper methods I made, but they work for now.  
   #Something like: cmakestrat.codemakestrategy(rounds, colors, slots)
   
@@ -58,6 +59,7 @@ def runGame(rounds, colors, slots, codemakestrategy, codebreakstrategy):
   #that method to make another guess on.  runGame and whatever cbreakstrat method was 
   #selected pass the action back and forth until the game is over.  
   while rounds>0:
+    rounds = rounds-1
     guess=cbreakstrat.cbreakstratHelper(codebreakstrategy,rounds, colors, slots, history)
     roundgrade=gradeguess(colors, slots, code, guess)
     temp=[]
@@ -66,6 +68,7 @@ def runGame(rounds, colors, slots, codemakestrategy, codebreakstrategy):
     history.append(temp)
     if(roundgrade[0]==slots):
       print("Code Broken!")
+      print("Code was: "+code)
       sys.exit(0)
     if(rounds==0):
       print("That was the last round!")
@@ -83,15 +86,17 @@ def main():
     for item in sys.argv:
       print(item)
     sys.exit(1)  
-  try:
-    runGame(sys.argv[1],sys.argv[2],sys.argv[3],sys.argv[4],sys.argv[5])
+  #try:
+  runGame(sys.argv[1],sys.argv[2],sys.argv[3],sys.argv[4],sys.argv[5])
+  """
   except:
     print("Exception catch")
     print("Here are the params required to run this program:")
     print("python mastermind.py rounds colors slots cmakestrat cbreakstrat")
     for item in sys.argv:
       print(item)
-    sys.exit(1)       
+    sys.exit(1)
+  """
 
 # This is the standard boilerplate that calls the main() function.
 if __name__ == '__main__':

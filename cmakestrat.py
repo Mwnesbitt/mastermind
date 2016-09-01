@@ -15,9 +15,9 @@ def cmakestratHelper(name, param1, param2, param3):  #there has to be a better w
   #param3: slots
   #params 1 - 3 are everything that a codemaking strategy needs to know in order to act
   if(name=="randomCode"):
-    randomCode(rounds, colors, slots)
+    return randomCode(param1, param2, param3)
   elif(name=="askAHuman"):
-    askAHuman(rounds, colors, slots)
+    return askAHuman(param1, param2, param3)
   #more elifs if we want more codemaking strategies
   else:
     print("Codemaking strategy "+name+" doesn't exist")
@@ -29,9 +29,10 @@ def randomCode(rounds, colors, slots):
   while i<slots:
     code = code + str(random.randrange(0,colors))
     i=i+1
+  print(code)
   return code
 
 def askAHuman(rounds, colors, slots):
-  print("You are making a code for a mastermind game that has "+rounds+"rounds,"+colors+" colors, and "+slots+"slots")
+  print("You are making a code for a mastermind game that has "+str(rounds)+"rounds,"+str(colors)+" colors, and "+str(slots)+"slots")
   code = str(input("Enter your code:")) #assumes proper formatting
   return code

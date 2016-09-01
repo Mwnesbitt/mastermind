@@ -16,11 +16,11 @@ def cbreakstratHelper(name, param1, param2, param3, param4): #there has to be a 
   #param4: history
   #params 1 - 4 are everything that a codebreaking strategy needs to know about the state of the game in order to act
   if(name=="randomGuess"):
-    randomGuess(param1, param2, param3, param4)
+    return randomGuess(param1, param2, param3, param4)
   elif(name=="askAHuman"):
-    asAHuman(param1, param2, param3,param4)
+    return askAHuman(param1, param2, param3,param4)
   elif(name=="dontBeDumb"):
-    dontBeDumb(param1, param2, param3, param4)
+    return dontBeDumb(param1, param2, param3, param4)
   #more elifs as we add more codebreaking strategies
   else:
     print("Codebreaking strategy "+name+" doesn't exist")
@@ -32,13 +32,15 @@ def randomGuess(rounds, colors, slots, history):
   while i<slots:
     guess = guess + str(random.randrange(0,colors))
     i=i+1
+  print(guess)
   return guess
   
 def askAHuman(rounds, colors, slots, history):
-  print("You are trying to break a code for a mastermind game that has "+rounds+"rounds,"+colors+" colors, and "+slots+"slots.  History below:")
+  print("You are trying to break a code for a mastermind game that has "+str(rounds)+"rounds,"+str(colors)+" colors, and "+str(slots)+"slots.  History below:")
   for item in history:
     print(item[0], item[1]) #assumes history object is properly formed
   guess = str(input("Enter your guess:")) #assumes proper formatting
+  return guess
   
 def dontBeDumb(rounds, colors, slots, history):
 #cycles through all possible guesses, assuming each one is the actual code and checking to see
