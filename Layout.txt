@@ -4,13 +4,22 @@ There is a codemaker and a codebreaker.  There are also rules of the game that t
 we could think of that as a third role-- referee.  The referee implements the game and prompts each of the players to make their
 moves when it is their turn.
 
-To do this, 
+To do this, there are files for each of those 3 roles that are necessary to have a game.  The fourth .py file is for doing 
+analysis on the game (you can think of that as the spectator role.)
 
-Right now there are only 2 files-- mastermind.py and strategies.py where all the strategies are stored.  mastermind.py should call on strategies.py all the time-- one strategy is randomguess, another is dontbedumb, and third could be an improvement on dontbedumb where it doesn't double up on colors.  (Google some mastermind strategies if you want.)   It's possible that a strategy can be "user guesses" which is implemented in games where the user is guessing rather than the computer-- not sure if that's the way to go just yet as I need to consider exactly how to implement this
+1
+Mastermind.py is the referre file: you have to call it and tell it what type of game you want to play.
+The parameters are colors available, slots in a code, number of guesses, and how each player will operate. (5 total parameters)
 
+2
+cmakestrat.py is the codebreaker file-- this gets called by mastermind.py to decide how the codemaker player will behave.
 
+3
+cbreakstrat.py is the codebreaker file-- this gets called by mastermind.py to decide how the codebreaker player will behave.
 
-
+4
+wrapper.py is the file that contains all the tools we need to analysis on games, including calling mastermind many times in order
+to record averages.
 
 
 Initial Coding plan:

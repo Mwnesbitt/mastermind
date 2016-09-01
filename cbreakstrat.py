@@ -46,3 +46,6 @@ def dontBeDumb(rounds, colors, slots, history):
 #cycles through all possible guesses, assuming each one is the actual code and checking to see
 #if all previous guesses would grade to what they actually graded to.  Throws out the guess if not.
   return ""
+  
+## other functions can be an improvement on dontbedumb where you try to avoid guessing the same color.
+##google mastermind strategies to add more strategies here.
