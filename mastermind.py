@@ -2,35 +2,26 @@ import sys
 import re
 import os
 import random
-import strategies
+import cbreakstrat
+import cmakestrat
 
-def createcode(colors, length):
-  #colors is the number of colors available in the game as an integer
-  #length is the number of colored pegs in the code
-  code=""
-  i=0
-  while i<length:
-    code = code + str(random.randrange(0,colors))#Have you done any research on how "good" python's RNG is?
-    i=i+1
-  return code
-
-def gradeguess(code, guess):
+def gradeguess(colors, slots, code, guess):
   #assumes properly formatted code and guess--strings of 0 to 5 with length 4
   blackpegs=0
   whitepegs=0
   i=0
   tempCode = list(code)#turn code into a list
   tempGuess = list(guess)#turn guess into a list
-  while i<4:#run through the code to check for black pegs
+  while i<slots:#run through the code to check for black pegs
     if(tempGuess[i]==tempCode[i]):
       blackpegs = blackpegs+1
       tempCode[i]='b'#replace the black pegs with a b so it wont be counted in the white peg section
       tempGuess[i]='b'#replace the black pegs with a b so it wont be counted in the white peg section
     i=i+1
   i=0 #reset i for new loop
-  while i<4:#run through the code to check for white pegs
+  while i<slots:#run through the code to check for white pegs
     k=0 #k=0
-    while k<4:
+    while k<slots:
         if(tempGuess[i]=='b'): #makes sure that black pegs aren't counted as being white pegs
             break
         if(tempGuess[i]==tempCode[k]):
@@ -55,7 +46,7 @@ def codebreaker():
     rounds = rounds-1
     guess = str(input("Take a guess: ")) #assumes a guess is properly formatted
     #print(code)
-    pegs=gradeguess(code,guess)
+    pegs=gradeguess(colors, slots, code, guess)
     temp=[]
     temp.append(guess)
     temp.append(pegs)
@@ -109,8 +100,17 @@ def runGame(rounds, colors, slots, codemakestrategy, codebreakstrategy):
   code = cmakestrat.cmakestratHelper(codemakestrategy, rounds, colors, slots)
   #There has to be a better way than using the helper methods I made, but they work for now.  Something like: cmakestrat.codemakestrategy(rounds, colors, slots)
   
-  #now we start looping through the guess-- this function needs to build up the history object and pass it back and forth to cbreakstrat.codebreakstrategy()
-  
+  #now we start looping through the rounds-- this process needs to build up the history object and pass it back and forth to cbreakstrat.codebreakstrategy()
+  while rounds>0:
+    guess=cbreakstrat.cbreakstratHelper(codebreakstrategy,rounds, colors, slots, history)
+    roundgrade=gradeguess(colors, slots, code,guess)
+    if(roundgrade[0]==slots):
+      print("Code Broken!")
+      sys.exit(0)
+    if(rounds==0):
+      print("That was the last round!")
+      print("Code not broken.  Code was: "+code)
+      sys.exit(0)
   
     
 
