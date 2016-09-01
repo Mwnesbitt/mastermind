@@ -43,13 +43,13 @@ def askAHuman(rounds, colors, slots, history):
   return guess
   
 def dontBeDumb(rounds, colors, slots, history):  #Pretty sure runtime on this can be improved.
-""" There are definitely some issues with this method if you use random guesses-- it doesn't loop forever, and incrementing
-to the next code seems broken.  My concern here is that starting at 0* is probably not optimal so these errors need to be worked out
-if its really going to be the best algo.  I think the area to work them out is in helperfunctions.dontBeDumbIncrementGuess.  That function
-doesn't know how to roll over back to 0*.  If it did that, we could pick an initial guess of 1234...n and then increment.  Beyond that, 
-there could be an even more complicated function that increments more intelligently by skipping guesses that have doubled colors and coming
-back to them-- I suspect this is better because the guess gives you more information if there aren't doubled colors.
-"""
+  """ There are definitely some issues with this method if you use random guesses-- it doesn't loop forever, and incrementing
+  to the next code seems broken.  My concern here is that starting at 0* is probably not optimal so these errors need to be worked out
+  if its really going to be the best algo.  I think the area to work them out is in helperfunctions.dontBeDumbIncrementGuess.  That function
+  doesn't know how to roll over back to 0*.  If it did that, we could pick an initial guess of 1234...n and then increment.  Beyond that, 
+  there could be an even more complicated function that increments more intelligently by skipping guesses that have doubled colors and coming
+  back to them-- I suspect this is better because the guess gives you more information if there aren't doubled colors.
+  """
   #guess=randomGuess(rounds, colors, slots, history)
   i=0
   

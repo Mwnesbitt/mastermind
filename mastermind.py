@@ -34,9 +34,9 @@ def runGame(rounds, colors, slots, codemakestrategy, codebreakstrategy):
     temp.append(guess)
     temp.append(roundgrade)
     history.append(temp)
+    print("round "+str(len(history)))
     for item in history:
       print(item)
-    print("round "+str(len(history)))
     rounds = rounds-1
     if(roundgrade[0]==slots):
       print("Code Broken!")
