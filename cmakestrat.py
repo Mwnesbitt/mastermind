@@ -32,6 +32,6 @@ def randomCode(rounds, colors, slots):
   return code
 
 def askAHuman(rounds, colors, slots):
-  print("You are making a code for a mastermind game that has "+str(rounds)+"rounds,"+str(colors)+" colors, and "+str(slots)+"slots")
-  code = str(input("Enter your code:")) #assumes proper formatting
+  print("You are making a code for a mastermind game that has "+str(rounds)+" rounds,"+str(colors)+" colors, and "+str(slots)+" slots")
+  code = str(input("Enter your code:")) #assumes proper formatting-- use mastermind.isWellFormed to check and reject if False
   return code

@@ -1,6 +1,4 @@
 import sys
-import re
-import os
 import random
 import cbreakstrat
 import cmakestrat
@@ -36,6 +34,18 @@ def gradeguess(colors, slots, code, guess):
   #print("guess= "+"".join(tempGuess))
   return result
 
+def isWellFormed(string, colors, slots):
+  #assumes string is a bunch of numbers
+  if(len(string)!=slots):
+    return False
+  i=0
+  while i<len(string):
+    if(int(string[i])<0):
+      return False
+    if(int(string[i])>slots-1):
+      return False
+  return True
+  
 def runGame(rounds, colors, slots, codemakestrategy, codebreakstrategy):
   rounds=int(rounds)
   colors=int(colors)
@@ -61,13 +71,13 @@ def runGame(rounds, colors, slots, codemakestrategy, codebreakstrategy):
   selected pass the action back and forth until the game is over.  
   """
   while rounds>0:
-    rounds = rounds-1
-    guess=cbreakstrat.cbreakstratHelper(codebreakstrategy,rounds, colors, slots, history)
-    roundgrade=gradeguess(colors, slots, code, guess)
+    guess=cbreakstrat.cbreakstratHelper(codebreakstrategy,rounds, colors, slots, history) #check your indexing on what the strats are expecting-- round n or n-1?
+    roundgrade=gradeguess(colors, slots, code, guess) 
     temp=[]
     temp.append(guess)
     temp.append(roundgrade)
     history.append(temp)
+    rounds = rounds-1
     if(roundgrade[0]==slots):
       print("Code Broken!")
       print("Code was: "+code)

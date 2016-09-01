@@ -36,10 +36,10 @@ def randomGuess(rounds, colors, slots, history):
   return guess
   
 def askAHuman(rounds, colors, slots, history):
-  print("You are trying to break a code for a mastermind game that has "+str(rounds)+"rounds,"+str(colors)+" colors, and "+str(slots)+"slots.  History below:")
+  print("You are trying to break a code for a mastermind game that has "+str(rounds)+" rounds,"+str(colors)+" colors, and "+str(slots)+" slots.  History below:")
   for item in history:
     print(item[0], item[1]) #assumes history object is properly formed
-  guess = str(input("Enter your guess:")) #assumes proper formatting
+  guess = str(input("Enter your guess:")) #assumes proper formatting-- use mastermind.isWellFormed to check and reject if False
   return guess
   
 def dontBeDumb(rounds, colors, slots, history):
