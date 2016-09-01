@@ -1,4 +1,19 @@
-Coding plan:
+Layout of the repository:
+The program is designed to match the underlying logic of what's actually happening when two people play mastermind.
+There is a codemaker and a codebreaker.  There are also rules of the game that the two people jointly agree to execute and abide by, but 
+we could think of that as a third role-- referee.  The referee implements the game and prompts each of the players to make their
+moves when it is their turn.
+
+To do this, 
+
+Right now there are only 2 files-- mastermind.py and strategies.py where all the strategies are stored.  mastermind.py should call on strategies.py all the time-- one strategy is randomguess, another is dontbedumb, and third could be an improvement on dontbedumb where it doesn't double up on colors.  (Google some mastermind strategies if you want.)   It's possible that a strategy can be "user guesses" which is implemented in games where the user is guessing rather than the computer-- not sure if that's the way to go just yet as I need to consider exactly how to implement this
+
+
+
+
+
+
+Initial Coding plan:
 A. User guesses the computer's code  DONE
     1. Get the computer to pick a code and print it.  DONE
     2. Find out how to do I/O from the command line-- press enter to make it pick a new code DONE
@@ -6,8 +21,9 @@ A. User guesses the computer's code  DONE
     4. Create the full game DONE
 B. Computer guesses the user's code (employs strategies)
     1. Implement randomguess DONE.
-    2. Find a way to structure so that you can employ sophisticated strategies and have organized helper methods (rather than rewriting code)  The strategies should be flexible where the caller method passes the ball back and forth, calling the strategy after each round with the updated info.  Some strategies, like randomguess, will ignore that info but that has to be how strategies interface with the code.
+    2. Find a way to structure so that you can employ sophisticated strategies and have organized helper methods (rather than rewriting code)  The strategies should be flexible where the caller method passes the ball back and forth, calling the strategy after each round with the updated info.  Some strategies, like randomguess, will ignore that info but that has to be how strategies interface with the code.  DONE (This requried a major restructuring of the program's logic and layout-- I was able to make more general methods that had a better logical flow that better matched how a game is actually played-- I'm quite happy with the logic now-- very general and flexible and it didn't take that long to restructure.)
+    3. Implement dontBeDumb
+    4. Implement other strategies?
 C. Computer plays itself and records output so that you can evaluate strategies
 D. Mathematica can plot variables in # of pegs and # of colors.
 
-Right now there are only 2 files-- mastermind.py and strategies.py where all the strategies are stored.  mastermind.py should call on strategies.py all the time-- one strategy is randomguess, another is dontbedumb, and third could be an improvement on dontbedumb where it doesn't double up on colors.  (Google some mastermind strategies if you want.)   It's possible that a strategy can be "user guesses" which is implemented in games where the user is guessing rather than the computer-- not sure if that's the way to go just yet as I need to consider exactly how to implement this
