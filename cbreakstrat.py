@@ -2,6 +2,7 @@ import sys
 import re
 import os
 import random
+import helperfunctions
 
 """
 The goal is to have a collection of codebreaking strategy functions defined here.  They will all
@@ -42,10 +43,33 @@ def askAHuman(rounds, colors, slots, history):
   guess = str(input("Enter your guess:")) #assumes proper formatting-- use mastermind.isWellFormed to check and reject if False
   return guess
   
-def dontBeDumb(rounds, colors, slots, history):
-#cycles through all possible guesses, assuming each one is the actual code and checking to see
-#if all previous guesses would grade to what they actually graded to.  Throws out the guess if not.
-  return ""
-  
-## other functions can be an improvement on dontbedumb where you try to avoid guessing the same color.
+def dontBeDumb(rounds, colors, slots, history):  #runtime on this can definitely be improved...
+  i=0
+  guess=''
+  while i<slots:
+    guess = guess+"0"
+    i=i+1
+  #we have our initial guess of 0*.  Now we test it:
+  if(history==[]):
+    print(guess)
+    return guess
+  i=0
+  while i<colors**slots:
+    goodguess=True
+    for item in history: #Go through the history of the game:
+      if(guess==item[0]): #If this guess shows up as a guess in the history, throw it out, increment, and loop again
+        goodguess=False
+        break
+      if(helperfunctions.gradeguess(colors, slots, guess, item[0])!=item[1]):  #If this guess has any chance of being right, assuming its the code would preserve the grades of previous guesses.  If it does for all guesses, accept it
+        goodguess=False
+        break
+    if(goodguess==True):
+      print("approved guess")
+      return guess  
+    else:
+      #guess = randomGuess(rounds, colors, slots, history)
+      guess = helperfunctions.dontBeDumbIncrementGuess(guess,colors) #increments the guess by 1   
+    i=i+1  #the if statement should be true at some point, if not there's a bug somewhere
+    
+##other functions can be an improvement on dontbedumb where you try to avoid guessing the same color.
 ##google mastermind strategies to add more strategies here.

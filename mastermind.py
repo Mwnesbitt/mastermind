@@ -1,49 +1,7 @@
 import sys
 import cbreakstrat
 import cmakestrat
-
-def gradeguess(colors, slots, code, guess):
-  #assumes properly formatted code and guess--strings of 0 to colors with length slots
-  blackpegs=0
-  whitepegs=0
-  i=0
-  tempCode = list(code)#turn code into a list
-  tempGuess = list(guess)#turn guess into a list
-  while i<slots:#run through the code to check for black pegs
-    if(tempGuess[i]==tempCode[i]):
-      blackpegs = blackpegs+1
-      tempCode[i]='b'#replace the black pegs with a b so it wont be counted in the white peg section
-      tempGuess[i]='b'#replace the black pegs with a b so it wont be counted in the white peg section
-    i=i+1
-  i=0 #reset i for new loop
-  while i<slots:#run through the code to check for white pegs
-    k=0
-    while k<slots:
-        if(tempGuess[i]=='b'): #makes sure that black pegs aren't counted as being white pegs
-            break
-        if(tempGuess[i]==tempCode[k]):
-            whitepegs=whitepegs+1
-            tempGuess[i]='w'
-            tempCode[k]='w'
-            break
-        k=k+1
-    i=i+1
-  result=[blackpegs,whitepegs]
-  #print("code= "+code)
-  #print("guess= "+"".join(tempGuess))
-  return result
-
-def isWellFormed(string, colors, slots):
-  #assumes string is a bunch of numbers
-  if(len(string)!=slots):
-    return False
-  i=0
-  while i<len(string):
-    if(int(string[i])<0):
-      return False
-    if(int(string[i])>slots-1):
-      return False
-  return True
+import helperfunctions
   
 def runGame(rounds, colors, slots, codemakestrategy, codebreakstrategy):
   rounds=int(rounds)
@@ -71,11 +29,15 @@ def runGame(rounds, colors, slots, codemakestrategy, codebreakstrategy):
   """
   while rounds>0:
     guess=cbreakstrat.cbreakstratHelper(codebreakstrategy,rounds, colors, slots, history) #check your indexing on what the strats are expecting-- round n or n-1?
-    roundgrade=gradeguess(colors, slots, code, guess) 
+    #print(guess)
+    print (helperfunctions.gradeguess(colors, slots, code, guess))
+    roundgrade=helperfunctions.gradeguess(colors, slots, code, guess) 
     temp=[]
     temp.append(guess)
     temp.append(roundgrade)
     history.append(temp)
+    for item in history:
+      print(item)
     rounds = rounds-1
     if(roundgrade[0]==slots):
       print("Code Broken!")
