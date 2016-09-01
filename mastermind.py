@@ -29,8 +29,6 @@ def runGame(rounds, colors, slots, codemakestrategy, codebreakstrategy):
   """
   while rounds>0:
     guess=cbreakstrat.cbreakstratHelper(codebreakstrategy,rounds, colors, slots, history) #check your indexing on what the strats are expecting-- round n or n-1?
-    #print(guess)
-    print (helperfunctions.gradeguess(colors, slots, code, guess))
     roundgrade=helperfunctions.gradeguess(colors, slots, code, guess) 
     temp=[]
     temp.append(guess)
@@ -38,6 +36,7 @@ def runGame(rounds, colors, slots, codemakestrategy, codebreakstrategy):
     history.append(temp)
     for item in history:
       print(item)
+    print("round "+str(len(history)))
     rounds = rounds-1
     if(roundgrade[0]==slots):
       print("Code Broken!")

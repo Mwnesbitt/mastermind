@@ -51,7 +51,6 @@ def dontBeDumb(rounds, colors, slots, history):  #runtime on this can definitely
     i=i+1
   #we have our initial guess of 0*.  Now we test it:
   if(history==[]):
-    print(guess)
     return guess
   i=0
   while i<colors**slots:
@@ -64,8 +63,7 @@ def dontBeDumb(rounds, colors, slots, history):  #runtime on this can definitely
         goodguess=False
         break
     if(goodguess==True):
-      print("approved guess")
-      return guess  
+        return guess  
     else:
       #guess = randomGuess(rounds, colors, slots, history)
       guess = helperfunctions.dontBeDumbIncrementGuess(guess,colors) #increments the guess by 1   
