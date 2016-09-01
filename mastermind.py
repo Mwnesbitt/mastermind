@@ -115,38 +115,22 @@ def runGame(rounds, colors, slots, codemakestrategy, codebreakstrategy):
     
 
 def main():
-  """
-  Future Goal in customizing the program:
-  Allow the user to customize the program in several ways:
-  1. "Analytics mode" where there aren't a bunch of things printed to the screen--
-    this is the mode to use when trying to analytics and have the computer play itself.
-    You may want to generate a file that has the results-- this could be a csv
-    or something that could easily be imported into a graphing program like Mathematica
-  2. Change the parameters of the game: # of rounds, length of code, strategies employed
-    by the computer when the user is codemaking, etc.
-  """
-
-  """
-  if (len(sys.argv) != 2):
-    print("You need to specify 'codemaker' or 'codebreaker'")
-    for item in sys.argv:
-      print(item)
-    sys.exit(1)
-  if (sys.argv[1]=="codemaker"):
-    codemaker()
-  elif (sys.argv[1]=="codebreaker"):
-    codebreaker()
-  else:
-    print("You must select 'codemaker' or 'codebreaker'")
-    sys.exit(1)
-  """
   #main method assumes that setting up a game, the user will define a 5-tuple: 
   #number of rounds, number of colors, number of slots, codemaking strategy, codebreaking strategy
+  
+  if (len(sys.argv) != 6):
+    print("pre-screen")
+    print("Here are the params required to run this program:")
+    print("mastermind.py rounds colors slots cmakestrat cbreakstrat")
+    for item in sys.argv:
+      print(item)
+    sys.exit(1)  
   try:
     runGame(sys.argv[1],sys.argv[2],sys.argv[3],sys.argv[4],sys.argv[5])
   except:
+    print("Exception catch")
     print("Here are the params required to run this program:")
-    print("python mastermind.py rounds colors slots cmakestrat, cbreakstrat")
+    print("python mastermind.py rounds colors slots cmakestrat cbreakstrat")
     for item in sys.argv:
       print(item)
     sys.exit(1)       

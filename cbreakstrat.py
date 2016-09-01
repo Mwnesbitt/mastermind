@@ -5,10 +5,10 @@ import random
 
 """
 The goal is to have a collection of codebreaking strategy functions defined here.  They will all
-take the same arguments as one another.  Then the Mastermind.py file will reference a strategy here
-as it runs the game.  
+take the same arguments as one another so that they can easily be swapped for one another in 
+the mastermind.py program.  The Mastermind.py file will reference a strategy here as it runs the game.  
 """
-def cbreakstratHelper(name, param1, param2, param3, param4):
+def cbreakstratHelper(name, param1, param2, param3, param4): #there has to be a better way to do what I'm doing here but this works for now
   #name: name of the codebreaking strategy method
   #param1: rounds
   #param2: colors
@@ -20,40 +20,25 @@ def cbreakstratHelper(name, param1, param2, param3, param4):
   elif(name=="askAHuman"):
     asAHuman(param1, param2, param3,param4)
   elif(name=="dontBeDumb"):
-    dontBeDumb(param1, param2, param3, param4):
+    dontBeDumb(param1, param2, param3, param4)
   #more elifs as we add more codebreaking strategies
   else:
-    print("Strategy "+name+" doesn't exist")
+    print("Codebreaking strategy "+name+" doesn't exist")
     sys.exit(1)
     
 def randomGuess(rounds, colors, slots, history):
-  code = ''
+  guess = ''
   i=0
   while i<slots:
-    code = code + str(random.randrange(0,colors))
+    guess = guess + str(random.randrange(0,colors))
     i=i+1
-  return code
+  return guess
   
 def askAHuman(rounds, colors, slots, history):
-  print (code)
-  history=[]
-  while rounds>0:
-    rounds = rounds-1
-    guess = str(input("Take a guess: ")) #assumes a guess is properly formatted
-    pegs=gradeguess(code,guess)
-    temp=[]
-    temp.append(guess)
-    temp.append(pegs)
-    history.append(temp)
-    for var in history:
-      print(var[0],var[1]) #assumes proper formatting-- might be fragile
-    if(pegs[0]==4):
-      print("You win!  The code was "+code)
-      sys.exit(0)
-    if(rounds==0):
-      print("Sorry, you're out of guesses!  You lose!")
-      print("The code was: "+code)
-      sys.exit(0)
+  print("You are trying to break a code for a mastermind game that has "+rounds+"rounds,"+colors+" colors, and "+slots+"slots.  History below:")
+  for item in history:
+    print(item[0], item[1]) #assumes history object is properly formed
+  guess = str(input("Enter your guess:")) #assumes proper formatting
   
 def dontBeDumb(rounds, colors, slots, history):
 ### cycles through all possible guesses, assuming each one is the actual code and checking to see

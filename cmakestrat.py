@@ -5,11 +5,11 @@ import random
 
 """
 The goal is to have a collection of codemaking strategy functions defined here.  They will all
-take the same arguments as one another.  Then the Mastermind.py file will reference a strategy here
-as it runs the game.  
+take the same arguments as one another so that they can easily be swapped for one another in 
+the mastermind.py program.  The Mastermind.py file will reference a strategy here as it runs the game.  
 """
 
-def cmakestratHelper(name, param1, param2, param3):
+def cmakestratHelper(name, param1, param2, param3):  #there has to be a better way to do what I'm doing here but this works for now
   #name: name of the codemaking strategy method
   #param1: rounds  (perhaps there are sophisticated codemaking strategies that think about how long the game is-- need to have this built in)
   #param2: colors
@@ -33,6 +33,6 @@ def randomCode(rounds, colors, slots):
   return code
 
 def askAHuman(rounds, colors, slots):
-  print("You are making a code for a mastermind game that has "+rounds+"rounds,"+colors" colors, and "+slots+"slots")
+  print("You are making a code for a mastermind game that has "+rounds+"rounds,"+colors+" colors, and "+slots+"slots")
   code = str(input("Enter your code:")) #assumes proper formatting
   return code
