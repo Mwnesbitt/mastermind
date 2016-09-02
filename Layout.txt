@@ -31,8 +31,8 @@ A. User guesses the computer's code  DONE
 B. Computer guesses the user's code (employs strategies)
     1. Implement randomguess DONE.
     2. Find a way to structure so that you can employ sophisticated strategies and have organized helper methods (rather than rewriting code)  The strategies should be flexible where the caller method passes the ball back and forth, calling the strategy after each round with the updated info.  Some strategies, like randomguess, will ignore that info but that has to be how strategies interface with the code.  DONE (This requried a major restructuring of the program's logic and layout-- I was able to make more general methods that had a better logical flow that better matched how a game is actually played-- I'm quite happy with the logic now-- very general and flexible and it didn't take that long to restructure.)
-    3. Implement dontBeDumb
+    3. Implement dontBeDumb DONE
     4. Implement other strategies?
-C. Computer plays itself and records output so that you can evaluate strategies
+C. Computer plays itself and records output so that you can evaluate strategies DONE
 D. Mathematica can plot variables in # of pegs and # of colors.
 
