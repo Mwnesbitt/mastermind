@@ -1,5 +1,6 @@
 import sys
 import mastermind
+import csv
 """
 The goal here is have this file be a wrapper that runs mastermind.py many times to record output.
 It will run a computer v computer strategy where wrapper.py asks the user what strategies should be
@@ -21,7 +22,32 @@ and a few slots, where as a different one might work better with few colors but 
 #oracle function would probably only need to be dontBeDumbIncrementGuess so all we would have to do would
 #be to add some command line params to wrapper to specify this, I think.
 
-
+def multipleColorsSlots(rounds, startColors, endColors, startSlots, endSlots, codemakestrategy, codebreakstrategy, iterations):
+    
+    colorsList=[]
+    slotsList=[]
+    guessesPerList=[]
+    slots=int(startSlots)
+    while slots<=int(endSlots):
+        colors=int(startColors)
+        while colors<=int(endColors):
+            guessesPer=runGameMultiple(rounds, colors, slots, codemakestrategy, codebreakstrategy, iterations)             
+            #print ("Colors: "+str(colors))
+            #print ("Slots: "+str(slots))
+            #print ("Guesses per Game: "+str(guessesPer))
+            colorsList.append(colors)
+            slotsList.append(slots)
+            guessesPerList.append(guessesPer)
+            colors=colors+1
+        slots=slots+1
+    with open('output.csv', 'wb') as csvfile:
+        writer = csv.writer(csvfile, delimiter='|', quotechar='|', quoting=csv.QUOTE_MINIMAL)#might need to change delimiter my computer is weird
+        rows = zip(colorsList,slotsList,guessesPerList)
+        row=('Colors', 'Slots', 'Guesses Per Game','Iterations :'+iterations,"Code make: "+codemakestrategy,"Code break: "+codebreakstrategy)
+        writer.writerow(row)
+        for row in rows:
+            writer.writerow(row)
+            
 def runGameMultiple(rounds, colors, slots, codemakestrategy, codebreakstrategy, iterations):
     i = int(iterations)
     win=0
@@ -42,25 +68,23 @@ def runGameMultiple(rounds, colors, slots, codemakestrategy, codebreakstrategy, 
     
     
     guessesPer=float(guesses)/float(iterations)
-    return (win,loss,guessesPer)
+    return guessesPer
 
 def main():
-    if (len(sys.argv) != 7):
+    if (len(sys.argv) != 9):
         print("pre-screen")
         print("Here are the params required to run this program:")
-        print("wrapper.py rounds colors slots cmakestrat cbreakstrat iterations")
+        print("wrapper.py rounds startColors endColors startSlots endSlots cmakestrat cbreakstrat iterations")
         for item in sys.argv:
             print(item)
         sys.exit(0)  
   #try:
-    outcome=runGameMultiple(sys.argv[1],sys.argv[2],sys.argv[3],sys.argv[4],sys.argv[5],sys.argv[6])
-    win=outcome[0]
-    loss=outcome[1]
-    guessesPer=outcome[2]
-    print ("Wins: "+str(win))
-    print ("Losses: "+str(loss))
-    print ("Guesses Per Game: "+str(guessesPer))
-    print ("You won 1 in "+str(loss/win)+" games")
+    multipleColorsSlots(sys.argv[1],sys.argv[2],sys.argv[3],sys.argv[4],sys.argv[5],sys.argv[6],sys.argv[7],sys.argv[8])
+  
+    #outcome=runGameMultiple(sys.argv[1],sys.argv[3],sys.argv[5],sys.argv[6],sys.argv[7],sys.argv[8])
+    #guessesPer=outcome
+    #print ("Guesses Per Game: "+str(guessesPer))
+    
 if __name__ == '__main__':
   main()
         
