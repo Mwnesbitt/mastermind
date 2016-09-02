@@ -1,3 +1,8 @@
+Note: moveme:
+Want to record runtime of an algorithm for a given colors and slots:
+http://stackoverflow.com/questions/673523/how-to-measure-execution-time-of-command-in-windows-command-line
+http://stackoverflow.com/questions/1557571/how-to-get-time-of-a-python-program-execution
+
 Layout of the repository:
 The program is designed to match the underlying logic of what's actually happening when two people play mastermind.
 There is a codemaker and a codebreaker.  There are also rules of the game that the two people jointly agree to execute and abide by, but 
