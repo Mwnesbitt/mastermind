@@ -72,8 +72,6 @@ def runGameMultiple(rounds, colors, slots, codemakestrategy, codebreakstrategy, 
             print("An error occurred")
             sys.exit(1)
         i = i-1
-    
-    
     guessesPer=float(guesses)/float(iterations)
     return guessesPer
 

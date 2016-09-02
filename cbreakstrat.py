@@ -22,6 +22,8 @@ def cbreakstratHelper(name, param1, param2, param3, param4): #there has to be a 
     return askAHuman(param1, param2, param3,param4)
   elif(name=="dontBeDumb"):
     return dontBeDumb(param1, param2, param3, param4)
+  elif(name=="beSmart"):
+    return beSmart(param1, param2, param3, param4)
   #more elifs as we add more codebreaking strategies
   else:
     print("Codebreaking strategy "+name+" doesn't exist")
@@ -89,7 +91,6 @@ def dontBeDumb(rounds, colors, slots, history):  #Pretty sure runtime on this ca
     i=i+1 
   print("Never found a good guess-- WTF?")
 
-  
 def beSmart(rounds, colors, slots, history):
   """
   dontBeDumb is very close to the algorithm I use when playing mastermind, but is not quite what I use.
