@@ -42,7 +42,7 @@ def runGame(rounds, colors, slots, codemakestrategy, codebreakstrategy):
     if(rounds==0):
       return ("unbroken",code,len(history))
 
-def main():
+def main():  #now that the wrapper is built, we may not need a main method.  We're not deleting anything just yet, but consider streamlining.
   #main method assumes that setting up a game, the user will define a 5-tuple: 
   #number of rounds, number of colors, number of slots, codemaking strategy, codebreaking strategy
   
