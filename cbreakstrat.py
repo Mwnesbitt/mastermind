@@ -111,6 +111,8 @@ def beSmart(rounds, colors, slots, history):
   to that one, and it will also have to find a way to deprioritize guesses that double up on lots of colors.  This will be tricky
   to do in a way that doesn't devastate the runtime of the algorithm-- if it runs across a deprioritized guess it can't skip it 
   and come back to it-- it needs to store it in an array and then its last attempt will be to empty that array.
+  
+  Codes that dontBeDumb takes >8 guesses to get: 4543 5324 5444 5445 5543 5554.  Check these on beSmart!
   """
   return
   
