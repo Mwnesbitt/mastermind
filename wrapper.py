@@ -40,14 +40,21 @@ def multipleColorsSlots(rounds, startColors, endColors, startSlots, endSlots, co
             guessesPerList.append(guessesPer)
             colors=colors+1
         slots=slots+1
-    with open('output.csv', 'wb') as csvfile:
-        writer = csv.writer(csvfile, delimiter='|', quotechar='|', quoting=csv.QUOTE_MINIMAL)#might need to change delimiter my computer is weird
-        rows = zip(colorsList,slotsList,guessesPerList)
-        row=('Colors', 'Slots', 'Guesses Per Game','Iterations :'+iterations,"Code make: "+codemakestrategy,"Code break: "+codebreakstrategy)
-        writer.writerow(row)
-        for row in rows:
-            writer.writerow(row)
-            
+    rows = zip(colorsList,slotsList,guessesPerList)
+    with open('output.csv', 'w',encoding='utf8',newline='') as csvfile:
+        writer = csv.writer(csvfile, delimiter=',', quotechar='|', quoting=csv.QUOTE_MINIMAL)#might need to change delimiter my computer is weird      
+        header=['Iterations :'+iterations]
+        writer.writerow(header)
+        header=["Code make: "+codemakestrategy]
+        writer.writerow(header)
+        header=["Code break: "+codebreakstrategy]
+        writer.writerow(header)
+        header=['Colors', 'Slots', 'Guesses Per Game']
+        writer.writerow(header)
+        for item in rows:
+            writer.writerow(item)
+        csvfile.close()
+        
 def runGameMultiple(rounds, colors, slots, codemakestrategy, codebreakstrategy, iterations):
     i = int(iterations)
     win=0
