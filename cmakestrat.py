@@ -35,3 +35,9 @@ def askAHuman(rounds, colors, slots):
   print("You are making a code for a mastermind game that has "+str(rounds)+" rounds,"+str(colors)+" colors, and "+str(slots)+" slots")
   code = str(input("Enter your code:")) #assumes proper formatting-- use mastermind.isWellFormed to check and reject if False
   return code
+  
+def minimizedDuplicates(rounds, colors, slots):
+  """
+  This would be like randomCode, but it could test the theory that its better to have fewer duplicate colors in your code.
+  """
+  return
