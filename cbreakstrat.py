@@ -43,32 +43,44 @@ def askAHuman(rounds, colors, slots, history):
   return guess
   
 def dontBeDumb(rounds, colors, slots, history):  #Pretty sure runtime on this can be improved.
-  """ There are definitely some issues with this method if you use random guesses-- it doesn't loop forever, and incrementing
-  to the next code seems broken.  My concern here is that starting at 0* is probably not optimal so these errors need to be worked out
-  if its really going to be the best algo.  I think the area to work them out is in helperfunctions.dontBeDumbIncrementGuess.  That function
-  doesn't know how to roll over back to 0*.  If it did that, we could pick an initial guess of 1234...n and then increment.  Beyond that, 
-  there could be an even more complicated function that increments more intelligently by skipping guesses that have doubled colors and coming
-  back to them-- I suspect this is better because the guess gives you more information if there aren't doubled colors.
-  """
-  #guess=randomGuess(rounds, colors, slots, history)
-  i=0
+  """ 
+  This method works by always attempting to guess 0*, and counting up from there.  But before it makes the actual guess, it 
+  checks to see whether it was a "dumb guess" on two condition: 1. was this guess tried before? and 2. does this guess make 
+  sense given the history of guesses and grades in the game?.  If a potential guess passes that test, it's returned.
+
+  The runtime on this method can definitely be improved, possibly in several ways.  One way to do it would be to resume guessing
+  at whatever the last guess was.  If we've thrown out a bunch of guesses from 0* to the latest guess previously, we don't need 
+  to cycle through them and check them again because we already know they're bad.  There may be other runtime improvements as well,
+  but the point is not to make this a killer algorithm as its only supposed to implement the "dontbedumb" strategy-- being smart is 
+  another algorithm.
   
-  #Have the initial guess be 0*.  I think it's probably best for initial guess to actually be all different colors if possible.
+  I attempted to do some things with this strategy like the above-- using random guesses, e.g., but it wound up breaking the algorithm
+  because it would often run out of time in the while loop and return nothing to the runGame method, which breaks runGame.  Those attempts
+  are still in the code but are commented out-- they could probably be removed because I want to limit the scope on this algorithm and it
+  does its job.  It's only meant to be "not dumb," after all.
+  
+  Another issue is the dontBeDumbIncrementGuess function, which doesn't know how to roll over back to 0*.  That's not an issue for the 
+  way the algorithm is currently implemented, since it starts at 0* every time so it'll always run across every possible guess.  But 
+  beSmartIncrementGuess will have to be able to do roll over, I think.
+  """
   guess=''
+  #guess=randomGuess(rounds, colors, slots, history)
+  #Initial guess is 0*.
+  i=0
   while i<slots:
     guess = guess+"0"
     i=i+1
-  i=0
   
+  i=0
   while i<colors**slots: #Now that we have an initial guess, we check the history to make sure it isn't dumb
     goodguess=True
     for item in history: #Go through the history of the game:
-      if(guess==item[0]): #If this guess shows up as a prior guess in the history, it's a dumb guess.  
+      if(guess==item[0]): #If our proposed guess shows up as a prior guess in the history, it's a dumb guess.  
         goodguess=False
-        break
-      if(helperfunctions.gradeguess(colors, slots, guess, item[0])!=item[1]):  #If this guess isn't dumb, then assuming its correct would should preserve the grades of previous guesses.
+        break #pretty sure this isn't necessary.  Slight runtime improvement?
+      if(helperfunctions.gradeguess(colors, slots, guess, item[0])!=item[1]):  #If the grades of prior guesses don't match the grades those guesses would have received if our proposed guess were the code, then our proposed guess is a dumb guess.
         goodguess=False
-        break
+        break #pretty sure this isn't necessary.  Slight runtime improvement?
     if(goodguess==True):
         return guess  
     else:
@@ -87,7 +99,7 @@ def beSmart(rounds, colors, slots, history):
   1. I think guesses that aren't all a single color provide more utility in the future when checking a potential
      guess against the history of the game.  Thus, beSmart needs to select its next guess in a way that deprioritizes
      guesses that have doubled colors, where possible.  Keep in mind there may be more slots than colors, so this has
-     to be done intelligently
+     to be done intelligently.  But we don't want to start out with 0* as the first guess, e.g.
   2. When I play the game, I usually look at my last guess and try to find the "nearest" not dumb guess for it (that 
      doesn't have doubled colors, as stated in part 1.).  So beSmart should try to do that, rather than just starting 
      at the same value the way dontBeDumb starts at 0* every time.  This will also help runtime, I think, because dontBeDumb
