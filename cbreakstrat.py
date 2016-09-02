@@ -76,6 +76,24 @@ def dontBeDumb(rounds, colors, slots, history):  #Pretty sure runtime on this ca
       guess = helperfunctions.dontBeDumbIncrementGuess(guess,colors) #This needs fixing: It was built on the assumption that it would always start at 0*, so it doesn't know how to loop around.  I think that's the problem, anyway 
     i=i+1 
   print("Never found a good guess-- WTF?")
-    
-##other functions can be an improvement on dontbedumb where you try to avoid guessing the same color.
-##google mastermind strategies to add more strategies here.
+
+  
+def beSmart(rounds, colors, slots, history):
+  """
+  dontBeDumb is very close to the algorithm I use when playing mastermind, but is not quite what I use.
+  dontBeDumb divides all possible guesses into two sets-- "not dumb" and "dumb" and it doesn't distinguish among
+  "not dumb" guesses.  It continues guessing until there's only one "not dumb" guess, the answer.  
+  beSmart will distinguish between among the "not dumb" guesses in 2 ways:
+  1. I think guesses that aren't all a single color provide more utility in the future when checking a potential
+     guess against the history of the game.  Thus, beSmart needs to select its next guess in a way that deprioritizes
+     guesses that have doubled colors, where possible.  Keep in mind there may be more slots than colors, so this has
+     to be done intelligently
+  2. When I play the game, I usually look at my last guess and try to find the "nearest" not dumb guess for it (that 
+     doesn't have doubled colors, as stated in part 1.).  So beSmart should try to do that, rather than just starting 
+     at the same value the way dontBeDumb starts at 0* every time.  This will also help runtime, I think, because dontBeDumb
+     has a bad runtime since it has to constantly check guesses that it has thrown out in the past, since it always has an 
+     initial guess of 0*.
+  """
+  return
+  
+##google mastermind strategies or use your big brain to add more strategies here.
