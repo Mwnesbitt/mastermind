@@ -17,7 +17,6 @@ def runGame(rounds, colors, slots, codemakestrategy, codebreakstrategy):
   The guess is a string of digits, and the grade is a list of 2 numbers-- the black pegs and white pegs. 
   """
   code = cmakestrat.cmakestratHelper(codemakestrategy, rounds, colors, slots)
-  #print(code)
   """
   ^^^There has to be a better way than using the helper methods I made, but they work for now.  
   Something like: cmakestrat.codemakestrategy(rounds, colors, slots)
@@ -34,18 +33,11 @@ def runGame(rounds, colors, slots, codemakestrategy, codebreakstrategy):
     temp.append(guess)
     temp.append(roundgrade)
     history.append(temp)
-    print("round "+str(len(history)))
-    for item in history:
-      print(item)
     rounds = rounds-1
     if(roundgrade[0]==slots):
-      print("Code Broken!")
-      print("Code was: "+code)
-      sys.exit(0)
+      return ("broken",code,len(history))
     if(rounds==0):
-      print("That was the last round!")
-      print("Code not broken.  Code was: "+code)
-      sys.exit(0)
+      return ("unbroken",code,len(history))
 
 def main():
   #main method assumes that setting up a game, the user will define a 5-tuple: 
@@ -57,9 +49,17 @@ def main():
     print("mastermind.py rounds colors slots cmakestrat cbreakstrat")
     for item in sys.argv:
       print(item)
-    sys.exit(0)
+    sys.exit(0)  
   #try:
-  runGame(sys.argv[1],sys.argv[2],sys.argv[3],sys.argv[4],sys.argv[5])
+  outcome=runGame(sys.argv[1],sys.argv[2],sys.argv[3],sys.argv[4],sys.argv[5])
+  if(outcome[0]=="broken"):
+      print("Code Broken!")
+      print("Code was: "+outcome[1]+". It took you "+str(outcome[2])+" guesses to get this.")
+  elif(outcome[0]=="unbroken"):
+      print("That was the last round!")
+      print("Code not broken.  Code was: "+outcome[1]+". It took you "+str(outcome[2])+" guesses to get this.")
+  else:
+      print("An error has occurred")
   """
   except:
     print("Exception catch")
