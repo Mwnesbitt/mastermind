@@ -42,7 +42,7 @@ def multipleColorsSlots(rounds, startColors, endColors, startSlots, endSlots, co
         slots=slots+1
     rows = zip(colorsList,slotsList,guessesPerList)
     with open('output.csv', 'w',encoding='utf8',newline='') as csvfile:
-        writer = csv.writer(csvfile, delimiter=',', quotechar='|', quoting=csv.QUOTE_MINIMAL)#might need to change delimiter my computer is weird      
+        writer = csv.writer(csvfile, delimiter=',', quotechar='|', quoting=csv.QUOTE_MINIMAL)    
         header=['Iterations :'+iterations]
         writer.writerow(header)
         header=["Code make: "+codemakestrategy]
