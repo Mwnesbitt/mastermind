@@ -15,6 +15,12 @@ the wrapper could run 1000 games for all (x,y) in a certain range where x and y 
 Maybe different strategies have different tail behaviour-- one might be better with lots of colors
 and a few slots, where as a different one might work better with few colors but lots of slots.
 """
+#note: may want to add a way to run a simulation that actually cycles through all codes, rather than 
+#randomly generating them for each individual game.  This could be done by adding a codemaking strategy
+#called askAnOracle and then use a function in the wrapper to increment through all possible codes.  The
+#oracle function would probably only need to be dontBeDumbIncrementGuess so all we would have to do would
+#be to add some command line params to wrapper to specify this, I think.
+
 
 def runGameMultiple(rounds, colors, slots, codemakestrategy, codebreakstrategy, iterations):
     i = int(iterations)
