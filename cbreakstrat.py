@@ -82,8 +82,8 @@ def beSmart(rounds, colors, slots, history):
   """
   dontBeDumb is very close to the algorithm I use when playing mastermind, but is not quite what I use.
   dontBeDumb divides all possible guesses into two sets-- "not dumb" and "dumb" and it doesn't distinguish among
-  "not dumb" guesses.  It continues guessing until there's only one "not dumb" guess, the answer.  
-  beSmart will distinguish between among the "not dumb" guesses in 2 ways:
+  "not dumb" guesses, guessing the first one that it comes to.  The game goes on this way until there's only one 
+  "not dumb" guess, the answer.  beSmart will distinguish between among the "not dumb" guesses in 2 ways:
   1. I think guesses that aren't all a single color provide more utility in the future when checking a potential
      guess against the history of the game.  Thus, beSmart needs to select its next guess in a way that deprioritizes
      guesses that have doubled colors, where possible.  Keep in mind there may be more slots than colors, so this has
@@ -93,6 +93,12 @@ def beSmart(rounds, colors, slots, history):
      at the same value the way dontBeDumb starts at 0* every time.  This will also help runtime, I think, because dontBeDumb
      has a bad runtime since it has to constantly check guesses that it has thrown out in the past, since it always has an 
      initial guess of 0*.
+  beSmart will still guess the first "not dumb" guess that it comes to, but I want to design the strategy such that the 
+  "increment guess" helper function suggests higher priority "not dumb" guesses before lower priority ones.  Thus, 
+  beSmartIncrementGuess will need to take in the history (or at least the last guess) to start looking for "nearest" guesses
+  to that one, and it will also have to find a way to deprioritize guesses that double up on lots of colors.  This will be tricky
+  to do in a way that doesn't devastate the runtime of the algorithm-- if it runs across a deprioritized guess it can't skip it 
+  and come back to it-- it needs to store it in an array and then its last attempt will be to empty that array.
   """
   return
   
