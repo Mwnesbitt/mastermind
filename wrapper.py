@@ -2,25 +2,9 @@ import sys
 import mastermind
 import csv
 """
-The goal here is have this file be a wrapper that runs mastermind.py many times to record output.
-It will run a computer v computer strategy where wrapper.py asks the user what strategies should be
-used for codemaking and codebreaking, and then do that 1000 times and record the outputs
-of each round and provide statistics, like how long it took to guess the code on average, etc.
-This will be tricky-- it would be nice if the wrapper calling mastermind.py didn't print anything 
-to the terminal, but we'll have to see how that works.  Might have to add another parameter into 
-runGame that is a boolean on whether things get printed or not.  
-
-It would be nice to have this program generate a file that contains the results-- maybe a csv
-or something that could easily be imported into a graphing program like mathematica.  That way
-the wrapper could run 1000 games for all (x,y) in a certain range where x and y are colors and slots.
-Maybe different strategies have different tail behaviour-- one might be better with lots of colors
-and a few slots, where as a different one might work better with few colors but lots of slots.
+This file is a wrapper that runs mastermind.py many times to record output and do analysis on strategies.  The two main KPIs for 
+evaluating the performance of a strategy is avg number of guesses req'd to break the code and avg runtime.
 """
-#note: may want to add a way to run a simulation that actually cycles through all codes, rather than 
-#randomly generating them for each individual game.  This could be done by adding a codemaking strategy
-#called askAnOracle and then use a function in the wrapper to increment through all possible codes.  The
-#oracle function would probably only need to be dontBeDumbIncrementGuess so all we would have to do would
-#be to add some command line params to wrapper to specify this, I think.
 
 def multipleColorsSlots(rounds, startColors, endColors, startSlots, endSlots, codemakestrategy, codebreakstrategy, iterations):
     
