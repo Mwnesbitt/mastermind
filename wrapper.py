@@ -1,6 +1,7 @@
 import sys
 import mastermind
 import csv
+import time
 """
 This file is a wrapper that runs mastermind.py many times to record output and do analysis on strategies.  The two main KPIs for 
 evaluating the performance of a strategy is avg number of guesses req'd to break the code and avg runtime.
@@ -11,20 +12,24 @@ def multipleColorsSlots(rounds, startColors, endColors, startSlots, endSlots, co
     colorsList=[]
     slotsList=[]
     guessesPerList=[]
+    runtimeList=[]
     slots=int(startSlots)
     while slots<=int(endSlots):
         colors=int(startColors)
         while colors<=int(endColors):
+            tempStartTime=time.mktime(time.gmtime())
             guessesPer=runGameMultiple(rounds, colors, slots, codemakestrategy, codebreakstrategy, iterations)             
+            tempEndTime=time.mktime(time.gmtime())
             #print ("Colors: "+str(colors))
             #print ("Slots: "+str(slots))
             #print ("Guesses per Game: "+str(guessesPer))
             colorsList.append(colors)
             slotsList.append(slots)
             guessesPerList.append(guessesPer)
+            runtimeList.append((tempEndTime-tempStartTime)/int(iterations))
             colors=colors+1
         slots=slots+1
-    rows = zip(colorsList,slotsList,guessesPerList)
+    rows = zip(colorsList,slotsList,guessesPerList,runtimeList)
     with open('output.csv', 'w',encoding='utf8',newline='') as csvfile:
         writer = csv.writer(csvfile, delimiter=',', quotechar='|', quoting=csv.QUOTE_MINIMAL)    
         header=['Iterations :'+iterations]
@@ -33,7 +38,7 @@ def multipleColorsSlots(rounds, startColors, endColors, startSlots, endSlots, co
         writer.writerow(header)
         header=["Code break: "+codebreakstrategy]
         writer.writerow(header)
-        header=['Colors', 'Slots', 'Guesses Per Game']
+        header=['Colors', 'Slots', 'Guesses Per Game','Avg runtime']
         writer.writerow(header)
         for item in rows:
             writer.writerow(item)
