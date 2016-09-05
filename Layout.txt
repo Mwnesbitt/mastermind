@@ -6,12 +6,11 @@ of the players to make their moves when it is their turn.
 
 To do this, there are files for each of those 3 roles that are necessary to have a game.  There are two other .py files
 as well: the 4th .py file is for doing analysis on the game (you can think of that as the spectator role) and the fifth
-.py file is a bunch of helper methods that multiple other .py files needed to reference, so they had to live in their
+.py file is a bunch of helper methods that multiple other .py files needed to reference, so those methods had to live in their
 own location.
 
-1: Mastermind.py 
-The referee file: you have to call it and tell it what type of game you want to play, and it handles the gameplay mechanics.
-The parameters are colors available, slots in a code, number of guesses, and how each player will operate. (5 total parameters)
+1: mastermind.py 
+The referee file: you have to call it and tell it the desired game parameters, and it handles the gameplay mechanics.  The parameters are colors available, slots in a code, number of guesses, and how each player will operate. (5 total parameters)
 
 2: cmakestrat.py 
 The codebreaker file (code maker strategy): This gets called by mastermind.py to decide how the codemaker player will behave.
@@ -20,14 +19,10 @@ The codebreaker file (code maker strategy): This gets called by mastermind.py to
 The codebreaker file (code break strategy): This gets called by mastermind.py to decide how the codebreaker player will behave.
 
 4: wrapper.py
-The spectator file: This contains all the tools needed to analyze games and algorithms, including calling mastermind.py many 
-times in order to record data, specifically average rounds required to break a code.  If a library of codemaking and codebreaking
-strategies is built out, it would be cool to use the wrapper so they face off with one another and the data can be examined
-to see which strategies do well aginst which other strategies.
+The spectator file: This contains all the tools needed to analyze games and algorithms, including calling mastermind.py many times in order to record data, specifically average rounds required to break a code and runtime.  If a library of codemaking and codebreaking strategies is built out, it would be cool to use the wrapper so they face off with one another and the data can be examined to see which strategies do well aginst which other strategies.
 
 5: helpfunctions.py
-A hodgepodge of functions that some or all of the previous 4 files need to operate.  An example would be the ability to be told 
-a code and a guess and to determine the guess's grade.
+A hodgepodge of functions that some or all of the previous 4 files need to operate.  An example would be the ability to be told a code and a guess and to determine the guess's grade.
 
 
 Initial Coding plan:
