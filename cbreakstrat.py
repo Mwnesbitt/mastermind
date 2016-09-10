@@ -91,7 +91,7 @@ def dontBeDumb(rounds, colors, slots, history):  #Pretty sure runtime on this ca
         return guess  
     else:
       #guess = randomGuess(rounds, colors, slots, history)
-      guess = helperfunctions.dontBeDumbIncrementGuess(guess,colors) #This needs fixing: It was built on the assumption that it would always start at 0*, so it doesn't know how to loop around.  I think that's the problem, anyway 
+      guess = helperfunctions.dontBeDumbIncrementGuess(guess,colors,slots) #This needs fixing: It was built on the assumption that it would always start at 0*, so it doesn't know how to loop around.  I think that's the problem, anyway 
     i=i+1 
   print("Never found a good guess-- WTF?")
 
@@ -107,7 +107,7 @@ def dontBeDumbv2(rounds, colors, slots, history):
     return guess
   else: #otherwise, add one to the last guess and start from there to remove dumb guesses.
     lastguess = history[len(history)-1]
-    guess = helperfunctions.dontBeDumbIncrementGuess(lastguess[0], colors)
+    guess = helperfunctions.dontBeDumbIncrementGuess(lastguess[0], colors,slots)
     #print(guess)
     i=0
     while i<colors**slots: #Now that we have an initial guess, we check the history to make sure it isn't dumb
@@ -123,15 +123,23 @@ def dontBeDumbv2(rounds, colors, slots, history):
           return guess  
       else:
         #guess = randomGuess(rounds, colors, slots, history)
-        guess = helperfunctions.dontBeDumbIncrementGuess(guess,colors) #This needs fixing: It was built on the assumption that it would always start at 0*, so it doesn't know how to loop around.  I think that's the problem, anyway 
+        guess = helperfunctions.dontBeDumbIncrementGuess(guess,colors,slots) #This needs fixing: It was built on the assumption that it would always start at 0*, so it doesn't know how to loop around.  I think that's the problem, anyway 
       i=i+1 
     print("Never found a good guess-- WTF?")
   
   
 def dontBeDumbv3(rounds, colors, slots, history):
-  #don't be dumbv2, but the initial guess is random rather than 0
+  #Same as dontBeDumbv2, but the initial guess is random rather than 0.  The dontBeDumb suite should probably be cleaned up/organized, see comments in v2.
   #just check to see if its the first round or not, then call v2 but make sure it can loop around
-  return
+  #this won't have any better performance than v2 against a random code, but it protects against
+  #the possibility of a codemaking strategy trying to exploit the fact that v2 starts by checking 0* and counting up.
+  #after running it it seems to be faster and guess sooner for some reason.  This confuses me.  But perhaps its because
+  #not doubling up colors is something beneficial after all?  Like not starting at 0* leads to finding the answer in
+  #fewer guesses, which means a shorter runtime?
+  if len(history)==0: #If the game does not have any history, guess 0*
+    return helperfunctions.randomSequence(rounds, colors, slots)
+  else:
+    return dontBeDumbv2(rounds, colors, slots, history)
 
 def beSmart(rounds, colors, slots, history):
   """

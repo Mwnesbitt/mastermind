@@ -10,14 +10,15 @@ def dontBeDumbBaseN(num,b,numerals="0123456789abcdefghijklmnopqrstuvwxyz"):
   #TBH I don't understand how this function works.  I found it on stack exchange, and it does what I need.  
   return ((num == 0) and numerals[0]) or (dontBeDumbBaseN(num // b, b, numerals).lstrip(numerals[0]) + numerals[num % b])
 
-def dontBeDumbIncrementGuess(guess, colors):
+def dontBeDumbIncrementGuess(guess, colors, slots):
   #Takes a guess as a string, converts it to an int, adds to it, then converts to the right base, which uses
   #dontBeDumbBaseN, then converts to a string, then makes sure the string is of proper length.
   #The tricky part is making sure the addition carries properly, which is why I converted the guess to an int to rely
   #on the carrying of ints, and then I needed the dontBeDumbBaseN function to properly bring the int back to the
   #guess that it should be.
   temp=int(guess, colors)
-  temp = temp+1
+  temp = temp+1 
+  temp = temp%colors**slots
   temp = dontBeDumbBaseN(temp,colors)
   shortguess = str(temp)
   i=len(shortguess)
@@ -58,6 +59,13 @@ def gradeguess(colors, slots, code, guess):
   #print("guess= "+"".join(tempGuess))
   return result
 
+def randomSequence(rounds, colors, slots):
+  code = ''
+  i=0
+  while i<slots:
+    code = code + str(random.randrange(0,colors))
+    i=i+1
+  return code
   
 def isWellFormed(string, colors, slots):
   #assumes string is a bunch of numbers.  We need to change this and then implement this anywhere that the program gets user input  

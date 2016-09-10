@@ -58,10 +58,10 @@ def main():  #now that the wrapper is built, we may not need a main method.  We'
   outcome=runGame(sys.argv[1],sys.argv[2],sys.argv[3],sys.argv[4],sys.argv[5])
   if(outcome[0]=="broken"):
       print("Code Broken!")
-      print("Code was: "+outcome[1]+". It took you "+str(outcome[2])+" guesses to get this.")
+      print("Code was: "+outcome[1]+". It took "+str(outcome[2])+" guesses to get this.")
   elif(outcome[0]=="unbroken"):
       print("That was the last round!")
-      print("Code not broken.  Code was: "+outcome[1]+". It took you "+str(outcome[2])+" guesses to get this.")
+      print("Code not broken.  Code was: "+outcome[1]+". It took "+str(outcome[2])+" guesses to get this.")
   else:
       print("An error has occurred")
   """

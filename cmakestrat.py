@@ -2,6 +2,7 @@ import sys
 import re
 import os
 import random
+import helperfunctions
 """
 The goal is to have a collection of codemaking strategy functions defined here.  They will all
 take the same arguments as one another so that they can easily be swapped for one another in 
@@ -24,12 +25,7 @@ def cmakestratHelper(name, param1, param2, param3):  #there has to be a better w
     sys.exit(1)
 
 def randomCode(rounds, colors, slots):
-  code = ''
-  i=0
-  while i<slots:
-    code = code + str(random.randrange(0,colors))
-    i=i+1
-  return code
+  return helperfunctions.randomSequence(rounds, colors, slots)
 
 def askAHuman(rounds, colors, slots):
   print("You are making a code for a mastermind game that has "+str(rounds)+" rounds,"+str(colors)+" colors, and "+str(slots)+" slots")
