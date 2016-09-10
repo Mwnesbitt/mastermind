@@ -22,6 +22,10 @@ def cbreakstratHelper(name, param1, param2, param3, param4): #there has to be a 
     return askAHuman(param1, param2, param3,param4)
   elif(name=="dontBeDumb"):
     return dontBeDumb(param1, param2, param3, param4)
+  elif(name=="dontBeDumbv2"):
+    return dontBeDumbv2(param1, param2, param3, param4)
+  elif(name=="dontBeDumbv3"):
+    return dontBeDumbv3(param1, param2, param3, param4)
   elif(name=="beSmart"):
     return beSmart(param1, param2, param3, param4)
   #more elifs as we add more codebreaking strategies
@@ -90,6 +94,44 @@ def dontBeDumb(rounds, colors, slots, history):  #Pretty sure runtime on this ca
       guess = helperfunctions.dontBeDumbIncrementGuess(guess,colors) #This needs fixing: It was built on the assumption that it would always start at 0*, so it doesn't know how to loop around.  I think that's the problem, anyway 
     i=i+1 
   print("Never found a good guess-- WTF?")
+
+def dontBeDumbv2(rounds, colors, slots, history):
+  #I don't really like this method because it duplicates a lot of the code in dontBeDumb.  I might make a way to write
+  #this method so that dontBeDumb is a version of it so that there isn't duplicated code running around.
+  guess=''
+  if len(history)==0: #If the game does not have any history, guess 0*
+    i=0
+    while i<slots:
+      guess = guess+"0"
+      i=i+1
+    return guess
+  else: #otherwise, add one to the last guess and start from there to remove dumb guesses.
+    lastguess = history[len(history)-1]
+    guess = helperfunctions.dontBeDumbIncrementGuess(lastguess[0], colors)
+    #print(guess)
+    i=0
+    while i<colors**slots: #Now that we have an initial guess, we check the history to make sure it isn't dumb
+      goodguess=True
+      for item in history: #Go through the history of the game:
+        if(guess==item[0]): #If our proposed guess shows up as a prior guess in the history, it's a dumb guess.  
+          goodguess=False
+          break #pretty sure this isn't necessary.  Slight runtime improvement?
+        if(helperfunctions.gradeguess(colors, slots, guess, item[0])!=item[1]):  #If the grades of prior guesses don't match the grades those guesses would have received if our proposed guess were the code, then our proposed guess is a dumb guess.
+          goodguess=False
+          break #pretty sure this isn't necessary.  Slight runtime improvement?
+      if(goodguess==True):
+          return guess  
+      else:
+        #guess = randomGuess(rounds, colors, slots, history)
+        guess = helperfunctions.dontBeDumbIncrementGuess(guess,colors) #This needs fixing: It was built on the assumption that it would always start at 0*, so it doesn't know how to loop around.  I think that's the problem, anyway 
+      i=i+1 
+    print("Never found a good guess-- WTF?")
+  
+  
+def dontBeDumbv3(rounds, colors, slots, history):
+  #don't be dumbv2, but the initial guess is random rather than 0
+  #just check to see if its the first round or not, then call v2 but make sure it can loop around
+  return
 
 def beSmart(rounds, colors, slots, history):
   """
