@@ -1,6 +1,5 @@
-Iterations :100
+Iterations :1
 Code make: randomCode
-Code break: dontBeDumb
+Code break: dontBeDumbv2
 Colors,Slots,Guesses Per Game,Avg runtime
-2,10,6.5,0.06
-3,10,6.71,4.18
+8,6,8.0,1.0
